@@ -1,0 +1,26 @@
+﻿@model A_Market.Models.IdentificationType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IdentificationType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdentificationTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdentificationTypeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdentificationTypeKey }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

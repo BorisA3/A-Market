@@ -1,0 +1,51 @@
+﻿@model IEnumerable<A_Market.Models.Client>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdentificationType.IdentificationTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientIdentificationId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdentificationType.IdentificationTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientIdentificationId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ClientKey }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ClientKey }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ClientKey })
+        </td>
+    </tr>
+}
+
+</table>

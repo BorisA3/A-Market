@@ -6,118 +6,130 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
+using System.Windows.Forms;
 using A_Market.Data;
 using A_Market.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Build.Tasks;
+using static A_Market.Controllers.ManageController;
 
 namespace A_Market.Controllers
 {
-    public class IdentificationTypesController : Controller
+    public class RolesController : Controller
     {
         private A_MarketContext db = new A_MarketContext();
+        
 
-        // GET: IdentificationTypes
-        [Authorize(Roles = "IndexIdentificationType")]
+        // GET: Roles
         public ActionResult Index()
         {
-            return View(db.IdentificationTypes.ToList());
+            return View(db.Roles.ToList());
         }
 
-        // GET: IdentificationTypes/Details/5
-        [Authorize(Roles = "DetailsIdentificationType")]
+        // GET: Roles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IdentificationType identificationType = db.IdentificationTypes.Find(id);
-            if (identificationType == null)
+            Roles roles = db.Roles.Find(id);
+            if (roles == null)
             {
                 return HttpNotFound();
             }
-            return View(identificationType);
+            return View(roles);
         }
 
-        // GET: IdentificationTypes/Create
-        [Authorize(Roles = "CreateIdentificationType")]
+        // GET: Roles/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: IdentificationTypes/Create
+        // POST: Roles/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        private ApplicationDbContext dbAsp = new ApplicationDbContext();
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdentificationTypeKey,IdentificationTypeName")] IdentificationType identificationType)
+        public ActionResult Create([Bind(Include = "RoleId,RoleName")] Roles roles)
         {
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(dbAsp));
             if (ModelState.IsValid)
             {
-                db.IdentificationTypes.Add(identificationType);
-                db.SaveChanges();
+                
+
+                if (!roleManager.RoleExists("admin"))
+                {
+                    
+                    roleManager.Create(new IdentityRole("admin"));
+                    db.Roles.Add(roles);
+                    db.SaveChanges();
+
+                }
                 return RedirectToAction("Index");
             }
 
-            return View(identificationType);
+            return View(roles);
         }
 
-        // GET: IdentificationTypes/Edit/5
-        [Authorize(Roles = "EditIdentificationType")]
-
+        // GET: Roles/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IdentificationType identificationType = db.IdentificationTypes.Find(id);
-            if (identificationType == null)
+            Roles roles = db.Roles.Find(id);
+            if (roles == null)
             {
                 return HttpNotFound();
             }
-            return View(identificationType);
+            return View(roles);
         }
 
-        // POST: IdentificationTypes/Edit/5
+        // POST: Roles/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdentificationTypeKey,IdentificationTypeName")] IdentificationType identificationType)
+        public ActionResult Edit([Bind(Include = "RoleId,RoleName")] Roles roles)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(identificationType).State = EntityState.Modified;
+                db.Entry(roles).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(identificationType);
+            return View(roles);
         }
 
-        // GET: IdentificationTypes/Delete/5
-        [Authorize(Roles = "DeleteIdentificationType")]
+        // GET: Roles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IdentificationType identificationType = db.IdentificationTypes.Find(id);
-            if (identificationType == null)
+            Roles roles = db.Roles.Find(id);
+            if (roles == null)
             {
                 return HttpNotFound();
             }
-            return View(identificationType);
+            return View(roles);
         }
 
-        // POST: IdentificationTypes/Delete/5
+        // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            IdentificationType identificationType = db.IdentificationTypes.Find(id);
-            db.IdentificationTypes.Remove(identificationType);
+            Roles roles = db.Roles.Find(id);
+            db.Roles.Remove(roles);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

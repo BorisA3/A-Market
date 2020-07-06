@@ -129,8 +129,8 @@ C:\Users\Boris\source\repos\A-Market\A-Market\bin\es\Microsoft.Owin.Security.Fac
 C:\Users\Boris\source\repos\A-Market\A-Market\bin\es\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\Boris\source\repos\A-Market\A-Market\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\Boris\source\repos\A-Market\A-Market\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\Boris\source\repos\A-Market\A-Market\obj\Debug\A-Market.csprojAssemblyReference.cache
 C:\Users\Boris\source\repos\A-Market\A-Market\obj\Debug\A-Market.csproj.CoreCompileInputs.cache
 C:\Users\Boris\source\repos\A-Market\A-Market\obj\Debug\A-Market.csproj.CopyComplete
 C:\Users\Boris\source\repos\A-Market\A-Market\obj\Debug\A-Market.dll
 C:\Users\Boris\source\repos\A-Market\A-Market\obj\Debug\A-Market.pdb
+C:\Users\Boris\source\repos\A-Market\A-Market\obj\Debug\A-Market.csprojAssemblyReference.cache

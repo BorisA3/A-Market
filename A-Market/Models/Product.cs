@@ -46,5 +46,7 @@ namespace A_Market.Models
 
         [ForeignKey("CategoryKey")]
         public Category Category { get; set; }
+
+        public virtual ICollection<SaleDetails> SaleDetails { get; set; }
     }
 }

@@ -38,13 +38,15 @@
                             <li>@Html.ActionLink("Tipos de Identificacion", "Index", "IdentificationTypes")</li>
                             <li>@Html.ActionLink("Proveedores", "Index", "Suppliers")</li>
                             <li>@Html.ActionLink("Clientes", "Index", "Clients")</li>
-
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Ventas", "Index", "Sales")</li>
 
                             <li role="separator" class="divider"></li>
                             @*-------Ocultar Boton--------*@
                             @if (User.IsInRole("admin"))
                             {
                                 <li>@Html.ActionLink("Usuarios", "Index", "ApplicationUsers")</li>
+                                <li>@Html.ActionLink("Usuarios/Roles", "Index", "UserRoles")</li>
                             }
                             @*-------Fin--------*@
 

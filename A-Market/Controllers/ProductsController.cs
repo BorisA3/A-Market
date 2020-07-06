@@ -16,6 +16,7 @@ namespace A_Market.Controllers
         private A_MarketContext db = new A_MarketContext();
 
         // GET: Products
+        [Authorize(Roles = "IndexProduct")]
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Category);
@@ -23,6 +24,7 @@ namespace A_Market.Controllers
         }
 
         // GET: Products/Details/5
+        [Authorize(Roles = "DetailsProduct")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace A_Market.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "CreateProduct")]
         public ActionResult Create()
         {
             ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CategoryName");
@@ -63,6 +66,7 @@ namespace A_Market.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "EditProduct")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,6 +100,7 @@ namespace A_Market.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "DeleteProduct")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

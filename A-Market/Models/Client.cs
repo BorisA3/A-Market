@@ -34,5 +34,7 @@ namespace A_Market.Models
 
         [ForeignKey("IdentificationTypeKey")]
         public IdentificationType IdentificationType { get; set; }
+
+        public virtual ICollection<Sale>Sales{ get; set; }
     }
 }

@@ -11,22 +11,18 @@ using A_Market.Models;
 
 namespace A_Market.Controllers
 {
-   
     public class CategoriesController : Controller
     {
         private A_MarketContext db = new A_MarketContext();
 
         // GET: Categories
-
-        [Authorize(Roles = "IndexCategory")]
         public ActionResult Index()
         {
             return View(db.Categories.ToList());
         }
 
         // GET: Categories/Details/5
-        [Authorize(Roles = "DetailsCategory")]
-
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -42,9 +38,7 @@ namespace A_Market.Controllers
         }
 
         // GET: Categories/Create
-        //*  [Authorize(Roles = "admin")]
-        [Authorize(Roles = "CreateCategory")]
-
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
@@ -68,9 +62,7 @@ namespace A_Market.Controllers
         }
 
         // GET: Categories/Edit/5
-        //* [Authorize(Roles = "admin")]
-        [Authorize(Roles = "EditCategory")]
-
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -102,8 +94,7 @@ namespace A_Market.Controllers
         }
 
         // GET: Categories/Delete/5
-        //* [Authorize(Roles = "admin")]
-        [Authorize(Roles = "DeleteCategory")]
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

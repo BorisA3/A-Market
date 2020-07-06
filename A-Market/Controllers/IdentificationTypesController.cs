@@ -16,14 +16,12 @@ namespace A_Market.Controllers
         private A_MarketContext db = new A_MarketContext();
 
         // GET: IdentificationTypes
-        [Authorize(Roles = "IndexIdentificationType")]
         public ActionResult Index()
         {
             return View(db.IdentificationTypes.ToList());
         }
 
         // GET: IdentificationTypes/Details/5
-        [Authorize(Roles = "DetailsIdentificationType")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,7 +37,6 @@ namespace A_Market.Controllers
         }
 
         // GET: IdentificationTypes/Create
-        [Authorize(Roles = "CreateIdentificationType")]
         public ActionResult Create()
         {
             return View();
@@ -63,8 +60,6 @@ namespace A_Market.Controllers
         }
 
         // GET: IdentificationTypes/Edit/5
-        [Authorize(Roles = "EditIdentificationType")]
-
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,7 +91,6 @@ namespace A_Market.Controllers
         }
 
         // GET: IdentificationTypes/Delete/5
-        [Authorize(Roles = "DeleteIdentificationType")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

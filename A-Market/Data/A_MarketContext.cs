@@ -28,13 +28,5 @@ namespace A_Market.Data
         public System.Data.Entity.DbSet<A_Market.Models.IdentificationType> IdentificationTypes { get; set; }
 
         public System.Data.Entity.DbSet<A_Market.Models.Client> Clients { get; set; }
-
-        public System.Data.Entity.DbSet<A_Market.Models.Roles> Roles { get; set; }
-
-        public System.Data.Entity.DbSet<A_Market.Models.Sale> Sales { get; set; }
-
-        public System.Data.Entity.DbSet<A_Market.Models.SaleDetails> SaleDetails { get; set; }
-
-        public System.Data.Entity.DbSet<A_Market.Models.UserRoles> UserRoles { get; set; }
     }
 }

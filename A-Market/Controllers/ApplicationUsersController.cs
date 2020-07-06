@@ -9,13 +9,10 @@ using System.Web;
 using System.Web.Mvc;
 using A_Market.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-using static A_Market.Controllers.ManageController;
 
 namespace A_Market.Controllers
 {
-    [Authorize(Roles = "admin")]
     public class ApplicationUsersController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -61,11 +58,6 @@ namespace A_Market.Controllers
         public ActionResult Create()
         {
             return View();
-        }
-        public ActionResult CreateRoles(string id)
-        {
-            string codigo = id;
-            return RedirectToAction("Create","UserRoles", codigo);
         }
 
         // POST: ApplicationUsers/Create
@@ -163,7 +155,7 @@ namespace A_Market.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -173,73 +165,8 @@ namespace A_Market.Controllers
             return View(model);
         }
 
-        string Name; 
 
-
-        // GET: /Manage/ChangePassword
-        public ActionResult ChangePassword(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            CambiarPassword cp = new CambiarPassword();
-            ApplicationUser a = db.Users.Find(id);
-            cp.PasswordName = a.UserName;
-            Name = a.UserName;
-            if (cp == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cp);
-
-            
-        }
-
-        //
-        // POST: /Manage/ChangePassword
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(CambiarPassword model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var b = model.ConfirmPassword;
-
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-
-            var a = userManager.FindByName(Name);
-            var token = UserManager.GeneratePasswordResetToken(a.Id);
-            var result = await UserManager.ResetPasswordAsync(model.PasswordName, token, model.NewPassword);
-            
-            if (result.Succeeded)
-            {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null)
-                {
-                    
-                }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
-            }
-            AddErrors(result);
-            return View(model);
-        }
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
-
-
-
-
-
-
+        //----------ChangePassword--------------
+       
     }
 }

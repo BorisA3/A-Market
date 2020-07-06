@@ -16,8 +16,6 @@ namespace A_Market.Controllers
         private A_MarketContext db = new A_MarketContext();
 
         // GET: Clients
-
-       
         public ActionResult Index()
         {
             var clients = db.Clients.Include(c => c.IdentificationType);
@@ -25,7 +23,6 @@ namespace A_Market.Controllers
         }
 
         // GET: Clients/Details/5
-       
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,7 +38,6 @@ namespace A_Market.Controllers
         }
 
         // GET: Clients/Create
-       
         public ActionResult Create()
         {
             ViewBag.IdentificationTypeKey = new SelectList(db.IdentificationTypes, "IdentificationTypeKey", "IdentificationTypeName");
